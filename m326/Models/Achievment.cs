@@ -1,6 +1,6 @@
 ﻿namespace m326.Models
 {
-    enum Achievment
+    public enum Achievment
     {
         NEUTRAL = 0,
         NOT_ACHIEVED = 1,

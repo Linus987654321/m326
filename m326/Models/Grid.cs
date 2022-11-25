@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace m326.Models
 {
-    class Grid
+    public class Grid
     {
         public List<Topic> TopicList { get; set; }
 

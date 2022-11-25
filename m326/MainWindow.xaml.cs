@@ -39,7 +39,15 @@ namespace m326
         private void findUser_Click(object sender, RoutedEventArgs e)
         {
             MongoDb mongo = new MongoDb();
-            User user = mongo.getUserWithId(0);
+            User user = null;
+            try
+            {
+                user = mongo.getUserWithId(0);
+
+            } catch
+            {
+                Console.WriteLine("There is no usere with this id");
+            }
             user.Grid.TopicList = mongo.getAllTopics();
             mongo.updateUser(user);
         }

@@ -1,6 +1,6 @@
 ﻿namespace m326.Models
 {
-    enum Difficulty
+    public enum Difficulty
     {
         EASY = 0,
         ADVANCED = 1,

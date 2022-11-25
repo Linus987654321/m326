@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace m326.Models
 {
-    class Competence
+    public class Competence
     {
         public long Id { get; set; }
         public List<string> Links { get; set; }

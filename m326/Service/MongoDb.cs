@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace m326.Service
 {
-    class MongoDb
+    public class MongoDb
     {
         private readonly IMongoDatabase db;
         private const string connection = "mongodb://localhost:27017";
@@ -112,8 +112,16 @@ namespace m326.Service
             IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("user");
             var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
             var userDocument = collection.Find(filter).FirstOrDefault();
-            User user = BsonSerializer.Deserialize<User>(userDocument);
- 
+            User user = null;
+            try
+            {
+                user = BsonSerializer.Deserialize<User>(userDocument);
+
+            } catch (ArgumentNullException)
+            {
+                throw;
+            }
+
             return user;
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace m326.Models
 {
-    enum Role
+    public enum Role
     {
         ADMIN = 0,
         TEACHER = 1,
