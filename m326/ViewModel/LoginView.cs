@@ -1,15 +1,17 @@
 ﻿using m326.Command;
 using m326.Models;
 using m326.Service;
+using m326.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace m326.ViewModel
 {
-    class LoginView : ViewModelBase
+    public class LoginView : ViewModelBase
     {
         private string _errorText;
         public string ErrorText{ 
@@ -58,6 +60,8 @@ namespace m326.ViewModel
                 OnPropertyChanged(nameof(Password));
             }
         }
+
+        private User _user;
         public ICommand LoginCommand 
         { 
             get
@@ -67,14 +71,16 @@ namespace m326.ViewModel
                     {
                         if (isLoginValid())
                         {
-                            ErrorText = "top";
+                            GridWindow gridWindow = new GridWindow();
+                            gridWindow.DataContext = new GridView(_user, gridWindow);
+                            gridWindow.ShowDialog();
                         }
-                    }
+                    } 
                 );
             }
         }
 
-        private bool isLoginValid()
+        public bool isLoginValid()
         {
             bool validLogin = false;
             if (_password != null)
@@ -86,6 +92,7 @@ namespace m326.ViewModel
                     if (user.Password == this._password)
                     {
                         validLogin = true;
+                        this._user = user;
                     }
                     else
                     {

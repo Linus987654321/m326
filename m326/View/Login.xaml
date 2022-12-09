@@ -10,7 +10,7 @@
     <Window.DataContext>
         <vm:LoginView/>
     </Window.DataContext>
-    
+
     <Grid x:Name="MainGrid" Margin="12,20,28,20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -35,6 +35,6 @@
             </StackPanel>
         </StackPanel>
 
+
     </Grid>
-    
 </Window>

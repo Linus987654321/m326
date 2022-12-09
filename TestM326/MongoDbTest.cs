@@ -27,33 +27,9 @@ namespace TestM326
             //Arrange
             MongoDb mongo = new MongoDb();
             //Act
-            long number = mongo.getNumberOfTopics();
+            int number = mongo.getAllTopics().Count;
             //Assert
             Assert.IsTrue(number > 0);
-        }
-
-        [TestMethod]
-        public void TestGetNumberOfCompetencesOnTopic_validID()
-        {
-            //Arrange
-            MongoDb mongo = new MongoDb();
-            long topicId = 1;
-            //Act
-            long number = mongo.getNumberOfCompetencesOnTopic(topicId);
-            //Assert
-            Assert.IsTrue(number > -1);
-        }
-
-        [TestMethod]
-        public void TestGetNumberOfCompetencesOnTopic_invalidID()
-        {
-            //Arrange
-            MongoDb mongo = new MongoDb();
-            long topicId = -1;
-            //Act
-            long number = mongo.getNumberOfCompetencesOnTopic(topicId);
-            //Assert
-            Assert.IsTrue(number == 0);
         }
 
         [TestMethod]

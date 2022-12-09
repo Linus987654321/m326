@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace m326.ViewModel
 {
-    class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

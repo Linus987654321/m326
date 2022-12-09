@@ -1,0 +1,43 @@
+﻿<Window x:Class="m326.View.GridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:m326.ViewModel" 
+        mc:Ignorable="d"
+        Title="Grid" Height="500" Width="800">
+    <Window.DataContext>
+        <vm:GridView/>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Margin="10" FontSize="15" FontStyle="Oblique" Width="469">
+                <Run FontWeight="Bold">I</Run>
+                <Run>nformatik</Run>
+                <Run FontWeight="Bold">A</Run>
+                <Run>nwendungskompetenzen</Run>
+                <Run FontWeight="Bold">M</Run>
+                <Run>anagement</Run>
+                <Run FontWeight="Bold">S</Run>
+                <Run>ystem</Run>
+                <Run FontWeight="Bold"> - IAMS</Run>
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding Topics}" SelectedItem="{Binding SelectedTopic}" DisplayMemberPath="Title"></ComboBox>
+            <TextBlock Margin="10 0 0 0" FontWeight="Bold">Alle Kompetenzen:</TextBlock>
+            <ListView FontSize="10" HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="3" Height="300" ItemsSource="{Binding Competences}" SelectedItem="{Binding SelectedCompetence}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Title}" Width="300"></GridViewColumn>
+                        <GridViewColumn Header="Kompetenzstufe" DisplayMemberBinding="{Binding Difficulty}" Width="100"></GridViewColumn>
+                        <GridViewColumn Header="Erfüllt" DisplayMemberBinding="{Binding Achievment}" Width="100"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="10" Width="140" Command="{Binding CreateCompetence}">Kompetenz erstellen</Button>
+                <Button FontSize="14" FontWeight="Bold" Margin="60 10 50 10" Width="180" Command="{Binding OpenCompetence}">Kompetenz öffnen</Button>
+                <Button Margin="10" Command="{Binding OpenEditTopic}">Kompetenzbereiche bearbeiten, erstellen</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

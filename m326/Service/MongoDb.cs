@@ -44,42 +44,31 @@ namespace m326.Service
             return topics;
         }
 
-        public long getNumberOfTopics()
-        {
-            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
-            long doc = collection.CountDocuments(new BsonDocument());
-            return doc;
-        }
-
-        public long getNumberOfCompetencesOnTopic(long id)
+        public Topic getTopicWithId(ObjectId id)
         {
             IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
             var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
-            long doc = collection.CountDocuments(filter);
-            return doc;
+            var topicDocument = collection.Find(filter).FirstOrDefault();
+            Topic topic = null;
+            try
+            {
+                topic = BsonSerializer.Deserialize<Topic>(topicDocument);
+
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+
+            return topic;
         }
 
-        public void updateFieldsTopic<T>(string fieldName, T data, long topicId)
-        {
-            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", topicId);
-            var update = Builders<BsonDocument>.Update.Set(fieldName, data);
-            collection.UpdateOne(filter, update);
-        }
-
-        public void updateFieldsCompetence<T>(string fieldName, T data, long topicId, long competenceId) 
-        {
-            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", topicId) & Builders<BsonDocument>.Filter.Eq("_id", competenceId);
-            var update = Builders<BsonDocument>.Update.Set(fieldName, data);
-            collection.UpdateOne(filter, update);
-        }
 
         public void updateUser(User user)
         {
             IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("user");
             var filter = Builders<BsonDocument>.Filter.Eq("_id", user.Id);
-            var update = Builders<BsonDocument>.Update.Set("Role", user.Role).Set("Password", user.Password).Set("Grid", user.Grid);
+            var update = Builders<BsonDocument>.Update.Set("Role", user.Role).Set("Password", user.Password).Set("Topics", user.Topics);
             collection.UpdateOne(filter, update);
         }
 
@@ -91,20 +80,18 @@ namespace m326.Service
             collection.UpdateOne(filter, update);
         }
 
-        public void updateCompetence(long topicId, Competence competence)
-        {
-            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", topicId) & Builders<BsonDocument>.Filter.Eq("_id", competence.Id);
-            var update = Builders<BsonDocument>.Update.Set("Links", competence.Links).Set("Title", competence.Title)
-                .Set("Difficulty", competence.Difficulty).Set("Achievement", competence.Achievment);
-            collection.UpdateOne(filter, update);
-        }
-
         public void createTopic(Topic topic)
         {
             IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
             var doc = topic.ToBsonDocument();
             collection.InsertOne(doc);
+        }
+
+        public void deleteTopic(ObjectId topicId)
+        {
+            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("topic");
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", topicId);
+            collection.DeleteOne(filter);
         }
 
         public User getUserWithId(int id)
