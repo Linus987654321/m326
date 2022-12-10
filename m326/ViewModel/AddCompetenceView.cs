@@ -30,8 +30,10 @@ namespace m326.ViewModel
             _addCompetenceWindow = window;
             _user = user;
         }
+
         private readonly User _user;
         private readonly AddCompetenceWindow _addCompetenceWindow;
+        
         private List<Topic> _topics;
         public List<Topic> Topics
         {
@@ -142,6 +144,22 @@ namespace m326.ViewModel
                 );
             }
         }
+        public ICommand Close
+        {
+
+            get
+            {
+                return new RelayCommand(
+                    exex =>
+                    {
+                        _addCompetenceWindow.Close();
+                        GridWindow gridWindow = new GridWindow();
+                        gridWindow.DataContext = new GridView(_user, gridWindow);
+                        gridWindow.ShowDialog();
+                    }
+                );
+            }
+        }
 
         private void updateSite()
         {
@@ -159,23 +177,6 @@ namespace m326.ViewModel
             OnPropertyChanged(nameof(Title));
             OnPropertyChanged(nameof(Difficulty));
             OnPropertyChanged(nameof(Links));
-        }
-
-        public ICommand Close
-        {
-
-            get
-            {
-                return new RelayCommand(
-                    exex =>
-                    {
-                        _addCompetenceWindow.Close();
-                        GridWindow gridWindow = new GridWindow();
-                        gridWindow.DataContext = new GridView(_user, gridWindow);
-                        gridWindow.ShowDialog();
-                    }
-                );
-            }
         }
     }
 }

@@ -24,9 +24,9 @@ namespace m326.ViewModel
             _user = user;
 
         }
+
         private readonly EditTopicWindow _editTopicWindow;
         private readonly User _user;
-
 
         private Topic _selectedTopic;
         public Topic SelectedTopic
@@ -99,6 +99,7 @@ namespace m326.ViewModel
                 );
             }
         }
+
         public ICommand DeleteCompetence
         {
             get
@@ -115,6 +116,7 @@ namespace m326.ViewModel
                 );
             }
         }
+
         public ICommand DeleteTopic
         {
             get

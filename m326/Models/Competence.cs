@@ -11,12 +11,12 @@ namespace m326.Models
         public string Title { get; set; }
         public Difficulty Difficulty { get; set; }
 
-        public Achievment Achievment { get; set; }
+        public Achievement Achievement { get; set; }
 
         public Competence(string title, Difficulty difficulty)
         {
             Id = ObjectId.GenerateNewId();
-            Achievment = Achievment.NEUTRAL;
+            Achievement = Achievement.NEUTRAL;
             Title = title;
             Difficulty = difficulty;
         }

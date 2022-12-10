@@ -29,6 +29,7 @@ namespace m326.ViewModel
             _competenceEditWindow = window;
             _user = user;
         }
+
         private readonly User _user;
         private readonly CompetenceEditWindow _competenceEditWindow;
 
@@ -59,6 +60,7 @@ namespace m326.ViewModel
                 return _difficulties;
             }
         }
+
         public ICommand SaveAndClose
         {
             get

@@ -29,7 +29,7 @@
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Title}" Width="300"></GridViewColumn>
                         <GridViewColumn Header="Kompetenzstufe" DisplayMemberBinding="{Binding Difficulty}" Width="100"></GridViewColumn>
-                        <GridViewColumn Header="Erfüllt" DisplayMemberBinding="{Binding Achievment}" Width="100"></GridViewColumn>
+                        <GridViewColumn Header="Erfüllt" DisplayMemberBinding="{Binding Achievement}" Width="100"></GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

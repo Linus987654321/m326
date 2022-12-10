@@ -2,6 +2,7 @@
 using m326.Models;
 using m326.Service;
 using m326.View;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,19 @@ namespace m326.ViewModel
 {
     public class LoginView : ViewModelBase
     {
+
+        LoginView()
+        {
+            //empty
+        }
+        public LoginView(IMongoDb mock)
+        {
+            mongo = mock;
+        }
+
+        private readonly IMongoDb mongo = new MongoDb();
+        private User _user;
+
         private string _errorText;
         public string ErrorText{ 
             get 
@@ -61,7 +75,6 @@ namespace m326.ViewModel
             }
         }
 
-        private User _user;
         public ICommand LoginCommand 
         { 
             get
@@ -87,7 +100,6 @@ namespace m326.ViewModel
             {
                 try
                 {
-                    MongoDb mongo = new MongoDb();
                     User user = mongo.getUserWithId(_id);
                     if (user.Password == this._password)
                     {

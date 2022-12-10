@@ -3,6 +3,9 @@ using m326.Service;
 using System.Collections.Generic;
 using m326.Models;
 using System;
+using Moq;
+using m326.ViewModel;
+using MongoDB.Bson;
 
 namespace TestM326
 {
@@ -22,18 +25,35 @@ namespace TestM326
         }
 
         [TestMethod]
-        public void TestGetNumberOfTopics()
+        public void TestGetTopicWithId_invalidID()
         {
             //Arrange
             MongoDb mongo = new MongoDb();
-            //Act
-            int number = mongo.getAllTopics().Count;
+            ObjectId id = new ObjectId();
+
+            Action throwingAction = () =>
+            {
+                mongo.getTopicWithId(id);
+            };
             //Assert
-            Assert.IsTrue(number > 0);
+            Assert.ThrowsException<ArgumentNullException>(throwingAction);
         }
 
         [TestMethod]
-        public void TestGetUserWithIdc_validID()
+        public void TestGetTopicWithId_validID()
+        {
+            //Arrange
+            MongoDb mongo = new MongoDb();
+            ObjectId id = mongo.getAllTopics()[0].Id;
+
+            //Act
+            Topic topic = mongo.getTopicWithId(id);
+            //Assert
+            Assert.IsNotNull(topic);
+        }
+
+        [TestMethod]
+        public void TestGetUserWithId_validID()
         {
             //Arrange
             MongoDb mongo = new MongoDb();

@@ -15,23 +15,24 @@ namespace m326.ViewModel
         {
             //empty
         }
-        private User _user;
-        private readonly DetailCompetenceWindow _detailCompetenceWindow;
-
         public DetailCompetenceView(User user, Competence selectedCompetence, DetailCompetenceWindow detailCompetenceWindow)
         {
             _competence = selectedCompetence;
-            List<Achievment> achievments = new List<Achievment>();
-            achievments.Add(Achievment.NEUTRAL);
-            achievments.Add(Achievment.ACHIEVED);
-            achievments.Add(Achievment.NOT_ACHIEVED);
-            _achievments = achievments;
+            List<Achievement> achievments = new List<Achievement>();
+            achievments.Add(Achievement.NEUTRAL);
+            achievments.Add(Achievement.ACHIEVED);
+            achievments.Add(Achievement.NOT_ACHIEVED);
+            _achievements = achievments;
             _user = user;
             _detailCompetenceWindow = detailCompetenceWindow;
             Links = _competence.Links;
         }
 
+        private User _user;
+        private readonly DetailCompetenceWindow _detailCompetenceWindow;
+        
         public string Links { get; set; }
+        
         private Competence _competence;
         public Competence Competence
         {
@@ -42,12 +43,12 @@ namespace m326.ViewModel
             }
         }
 
-        private List<Achievment> _achievments;
-        public List<Achievment> Achievments
+        private List<Achievement> _achievements;
+        public List<Achievement> Achievements
         {
             get
             {
-                return _achievments;
+                return _achievements;
             }
         }
 

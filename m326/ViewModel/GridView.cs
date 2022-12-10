@@ -15,11 +15,15 @@ namespace m326.ViewModel
         {
             //empty
         }
+        public GridView(IMongoDb mock)
+        {
+            mongo = mock;
+        }
         public GridView(User user, GridWindow window)
         {
+            mongo = new MongoDb();
             this._user = user;
             user.Topics = updateTopics(user.Topics);
-            MongoDb mongo = new MongoDb();
             mongo.updateUser(user);
             this._topics = user.Topics;
             this._selectedTopic = _topics[0];
@@ -28,33 +32,9 @@ namespace m326.ViewModel
         }
 
         private readonly User _user;
-
         private readonly GridWindow _window;
-        //hohlt alle Topics aus der DB und falls bei welchen Competencen schon Achievment gesetzt ist wird das übernommen
-        private List<Topic> updateTopics(List<Topic> userTopics)
-        {
-            MongoDb mongo = new MongoDb();
-            List<Topic> updatedTopics = mongo.getAllTopics();
-            if (userTopics != null)
-            {
-                foreach (Topic topic in userTopics)
-                {
-                    if (updatedTopics.Exists(t => t.Id.Equals(topic.Id)) && topic.Competences != null)
-                    {
-                        foreach (Competence competence in topic.Competences)
-                        {
-                            if (competence.Achievment != Achievment.NEUTRAL)
-                            {
-                                updatedTopics.Find(t => t.Id.Equals(topic.Id)).Competences.Find(c => c.Id.Equals(competence.Id)).Achievment = competence.Achievment;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return updatedTopics;
-        }
-
+        private readonly IMongoDb mongo;
+        
         private List<Topic> _topics;
         public List<Topic> Topics
         {
@@ -63,6 +43,7 @@ namespace m326.ViewModel
                 return _topics;
             }
         }
+
         private Topic _selectedTopic;
         public Topic SelectedTopic
         {
@@ -78,6 +59,7 @@ namespace m326.ViewModel
                 OnPropertyChanged(nameof(SelectedTopic));
             }
         }
+
         private List<Competence> _competences;
         public List<Competence> Competences
         {
@@ -86,6 +68,7 @@ namespace m326.ViewModel
                 return _competences;
             }
         }
+
         private Competence _selectedCompetence;
         public Competence SelectedCompetence
         {
@@ -159,6 +142,29 @@ namespace m326.ViewModel
                     canExecute => _user != null && _user.Role == Role.ADMIN
                 );
             }
+        }
+
+        //returns a list with every topic in DB but Achievment is set based on the userTopics list
+        public List<Topic> updateTopics(List<Topic> userTopics)
+        {
+            List<Topic> updatedTopics = mongo.getAllTopics();
+            if (userTopics != null)
+            {
+                foreach (Topic topic in userTopics)
+                {
+                    if (updatedTopics.Exists(t => t.Id.Equals(topic.Id)) && topic.Competences != null)
+                    {
+                        foreach (Competence competence in topic.Competences)
+                        {
+                            if (competence.Achievement != Achievement.NEUTRAL)
+                            {
+                                updatedTopics.Find(t => t.Id.Equals(topic.Id)).Competences.Find(c => c.Id.Equals(competence.Id)).Achievement = competence.Achievement;
+                            }
+                        }
+                    }
+                }
+            }
+            return updatedTopics;
         }
     }
 }

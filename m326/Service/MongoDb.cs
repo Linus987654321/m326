@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace m326.Service
 {
-    public class MongoDb
+    public class MongoDb : IMongoDb
     {
         private readonly IMongoDatabase db;
-        private const string connection = "mongodb://localhost:27017";
+        private const string connection = "mongodb://localhost:27017/";
         private const string dbName = "m326";
 
 
@@ -21,14 +21,6 @@ namespace m326.Service
         {
             MongoClient mongo = new MongoClient(connection);
             db = mongo.GetDatabase(dbName);
-        }
-
-        public void createUser(User user)
-        {
-            IMongoCollection<BsonDocument> collection = db.GetCollection<BsonDocument>("user");
-            
-            var doc = user.ToBsonDocument();
-            collection.InsertOne(doc);
         }
 
         public List<Topic> getAllTopics()
@@ -62,7 +54,6 @@ namespace m326.Service
 
             return topic;
         }
-
 
         public void updateUser(User user)
         {
