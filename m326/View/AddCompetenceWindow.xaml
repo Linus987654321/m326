@@ -9,37 +9,37 @@
     <Window.DataContext>
         <vm:AddCompetenceView/>
     </Window.DataContext>
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="423*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <TextBlock  Margin="0 20 0 0" FontWeight="Bold">Kompetenz hinzufügen</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Kompetenzbereich:</TextBlock>
+                <TextBlock Width="110">Kompetenzbereich:</TextBlock>
                 <ComboBox Margin="10 0 0 0" Width="150" ItemsSource="{Binding Topics}" SelectedItem="{Binding SelectedTopic}" DisplayMemberPath="Title"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Name:</TextBlock>
-                <TextBox Margin="10 0 0 0" Width="300" Text="{Binding Title}"/>
+                <TextBlock Width="110">Name:</TextBlock>
+                <TextBox Margin="10 0 0 0" Width="200" Text="{Binding Title}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Schwierigkeit:</TextBlock>
+                <TextBlock Width="110">Schwierigkeit:</TextBlock>
                 <ComboBox Margin="10 0 0 0" Width="150" ItemsSource="{Binding Difficulties}" SelectedItem="{Binding Difficulty}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Links zu Resourcen:</TextBlock>
-                <TextBox Margin="10 0 0 0" Text="{Binding Links}"></TextBox>
+                <TextBlock Width="110">Links zu Resourcen:</TextBlock>
+                <TextBox Margin="10 0 0 0" Text="{Binding Links}" Width="219"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                <Button Margin="0 20 0 0" Command="{Binding AddCompetence}">Hinzüfgen</Button>
+                <Button Margin="160 20 0 0" Command="{Binding AddCompetence}">Hinzüfgen</Button>
                 <Button Margin="10 20 0 0" Command="{Binding Close}">Schliessen</Button>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1">
             <StackPanel>
-                <TextBlock FontWeight="Bold">Hinzugefügt Kompetenzen</TextBlock>
+                <TextBlock FontWeight="Bold">Hinzugefügte Kompetenzen</TextBlock>
                 <ListView FontSize="10" HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="3" Height="300" ItemsSource="{Binding Competences}">
                     <ListView.View>
                         <GridView>
@@ -50,5 +50,6 @@
                 </ListView>
             </StackPanel>
         </StackPanel>
+        <TextBlock Grid.Column="1" Margin="300 350 0 0">【﻿ＩＡＭＳ】</TextBlock>
     </Grid>
 </Window>

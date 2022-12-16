@@ -15,17 +15,16 @@
             <ColumnDefinition Width="29*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <Button Margin="2" Padding="2" Width="60" HorizontalAlignment="Left">Zurück</Button>
             <TextBlock FontWeight="Bold">Kompetenzbereich bearbeiten</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Kompetenzbereich wählen:</TextBlock>
+                <TextBlock Width="150">Kompetenzbereich wählen:</TextBlock>
                 <ComboBox Margin="10 0 0 0" ItemsSource="{Binding Topics}" SelectedItem="{Binding SelectedTopic}" DisplayMemberPath="Title"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Kompetenzbereich Titel:</TextBlock>
-                <TextBox Margin="10 0 0 0" Width="300" Text="{Binding SelectedTopic.Title}"/>
+                <TextBlock Width="150">Kompetenzbereich Titel:</TextBlock>
+                <TextBox Margin="10 0 0 0" Width="276" Text="{Binding SelectedTopic.Title}"/>
             </StackPanel>
-            <ListView FontSize="10" HorizontalContentAlignment="Center" Margin="0 10 0 0"  Height="120" ItemsSource="{Binding SelectedTopic.Competences}" SelectedItem="{Binding SelectedCompetence}">
+            <ListView FontSize="10" HorizontalContentAlignment="Center" Margin="0 10 0 0"  Height="120" ItemsSource="{Binding SelectedTopic.Competences}" SelectedItem="{Binding SelectedCompetence}" Width="405">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Title}" Width="300"></GridViewColumn>
@@ -39,19 +38,19 @@
                 <Button Margin="10 0 0 0" Command="{Binding Save}">Speichern und Schliessen</Button>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="25,0,0,0">
             <StackPanel>
                 <TextBlock FontWeight="Bold">Kompetenzbereich hinzufügen</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                     <TextBlock>Kompetenzbereich Titel:</TextBlock>
-                    <TextBox Margin="10 0 0 0" Width="280" Text="{Binding Title}"/>
+                    <TextBox Margin="10 0 0 0" Width="178" Text="{Binding Title}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 10 0 0" HorizontalAlignment="Center">
                     <Button Command="{Binding AddTopic}">Weiter zu Kompetenzen hinzufügen</Button>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        
+        <TextBlock Grid.Column="1" Margin="200 300 0 0">【﻿ＩＡＭＳ】</TextBlock>
 
     </Grid>
 </Window>

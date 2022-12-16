@@ -13,7 +13,7 @@ namespace m326.Service
     public class MongoDb : IMongoDb
     {
         private readonly IMongoDatabase db;
-        private const string connection = "mongodb://localhost:27017/";
+        private const string connection = "mongodb+srv://linus:L1nu8frk?@m326.lsraqdy.mongodb.net/test?authMechanism=SCRAM-SHA-1";
         private const string dbName = "m326";
 
 

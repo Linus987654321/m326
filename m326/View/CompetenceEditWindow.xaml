@@ -12,27 +12,27 @@
     </Window.DataContext>
     <Grid Margin="10">
         <StackPanel>
-            <Button Margin="2" Padding="2" Width="60" HorizontalAlignment="Left">Zurück</Button>
             <TextBlock FontWeight="Bold">Kompetenz bearbeiten</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Name:</TextBlock>
+                <TextBlock Width="120">Name:</TextBlock>
                 <TextBox Margin="10 0 0 0" Width="300" Text="{Binding Competence.Title}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Kompetenzbereich:</TextBlock>
+                <TextBlock Width="120">Kompetenzbereich:</TextBlock>
                 <TextBlock Margin="10 0 0 0" Width="150" Text="{Binding Topic.Title}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Schwierigkeit:</TextBlock>
+                <TextBlock Width="120">Schwierigkeit:</TextBlock>
                 <ComboBox Margin="10 0 0 0" Width="150" ItemsSource="{Binding Difficulties}" SelectedItem="{Binding Competence.Difficulty}"></ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock>Links zu Resourcen:</TextBlock>
-                <TextBox Margin="10 0 0 0" Text="{Binding Competence.Links}"></TextBox>
+                <TextBlock Width="120">Links zu Resourcen:</TextBlock>
+                <TextBox Margin="10 0 0 0" Text="{Binding Competence.Links}" Width="298"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10 0 0 0">
-                <Button Margin="0 20 0 0" Command="{Binding SaveAndClose}">Speichern und Schliessen</Button>
+                <Button Margin="280 20 0 0" Command="{Binding SaveAndClose}">Speichern und Schliessen</Button>
             </StackPanel>
         </StackPanel>
+        <TextBlock Margin="400 300 0 0">【﻿ＩＡＭＳ】</TextBlock>
     </Grid>
 </Window>
