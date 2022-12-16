@@ -135,6 +135,13 @@ namespace m326.ViewModel
 
                         MongoDb mongo = new MongoDb();
                         Competence competence = new Competence(_title, _difficulty);
+                        if (_links == null)
+                        {
+                            competence.Links = "";
+                        } else
+                        {
+                            competence.Links = _links;
+                        }
                         _selectedTopic.Competences.Add(competence);
                         mongo.updateTopic(_selectedTopic);
                         updateSite();
